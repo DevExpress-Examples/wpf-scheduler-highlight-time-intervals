@@ -1,3 +1,10 @@
+<!-- default file list -->
+*Files to look at*:
+
+* [MainWindow.xaml](./CS/SchedulerCellTemplate/MainWindow.xaml) (VB: [MainWindow.xaml](./VB/SchedulerCellTemplate/MainWindow.xaml))
+* [MainWindow.xaml.cs](./CS/SchedulerCellTemplate/MainWindow.xaml.cs) (VB: [MainWindow.xaml](./VB/SchedulerCellTemplate/MainWindow.xaml))
+* [TeamData.cs](./CS/SchedulerCellTemplate/TeamData.cs) (VB: [TeamData.vb](./VB/SchedulerCellTemplate/TeamData.vb))
+<!-- default file list end -->
 # How to color time cells partially
 
 
