@@ -1,55 +1,47 @@
 <Window x:Class="SchedulerCellTemplate.MainWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:dxe="http://schemas.devexpress.com/winfx/2008/xaml/editors"
+        xmlns:dxlc="http://schemas.devexpress.com/winfx/2008/xaml/layoutcontrol"
+        xmlns:dxmvvm="http://schemas.devexpress.com/winfx/2008/xaml/mvvm"
+        xmlns:dxsch="http://schemas.devexpress.com/winfx/2008/xaml/scheduling"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:SchedulerCellTemplate"
         mc:Ignorable="d"
-        xmlns:dxsch="http://schemas.devexpress.com/winfx/2008/xaml/scheduling"
-        xmlns:dxschv="http://schemas.devexpress.com/winfx/2008/xaml/scheduling/visual"
-        xmlns:dxmvvm="http://schemas.devexpress.com/winfx/2008/xaml/mvvm"
-        xmlns:dxlc="http://schemas.devexpress.com/winfx/2008/xaml/layoutcontrol"
-        xmlns:dxe="http://schemas.devexpress.com/winfx/2008/xaml/editors"
         DataContext="{dxmvvm:ViewModelSource local:CellCustomizationDemoViewModel}"
         Title="MainWindow" Height="700" Width="900">
-    <Window.Resources>
-        <SolidColorBrush x:Key="LunchBackground" Color="Blue" Opacity="0.4"/>
-        <Style x:Key="CellControl.Style" TargetType="dxschv:CellControl">
-            <Setter Property="ContentTemplate">
-                <Setter.Value>
-                    <DataTemplate>
-                        <local:CellControlDecorator LunchBrush="{StaticResource LunchBackground}"/>
-                    </DataTemplate>
-                </Setter.Value>
-            </Setter>
-        </Style>
-
-        <Style TargetType="dxsch:DayView">
-            <Style.Triggers>
-                <DataTrigger Binding="{Binding HighlightLunchHours}" Value="True">
-                    <Setter Property="CellStyle" Value="{StaticResource CellControl.Style}"/>
-                </DataTrigger>
-            </Style.Triggers>
-        </Style>
-    </Window.Resources>
     <DockPanel>
         <dxlc:LayoutControl DockPanel.Dock="Right"  Orientation="Vertical" VerticalAlignment="Top" Padding="0" MinWidth="200">
             <dxe:CheckEdit Content="Highlight Lunch Hours" IsChecked="{Binding HighlightLunchHours, Mode=TwoWay}" Margin="4,0,0,0"/>
             <dxlc:LayoutItem Label="Lunch Start">
-                <dxe:TextEdit EditValue="{Binding LunchStart, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay, Converter={local:TimeSpanToDateTimeConverter}}"
-                              Mask="hh:mm:ss" MaskType="DateTime" MaskUseAsDisplayFormat="True"  Margin="4,0,4,0" />
+                <dxe:TextEdit EditValue="{Binding LunchStart, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
+                              Mask="HH:mm:ss" MaskType="DateTime" MaskUseAsDisplayFormat="True"  Margin="4,0,4,0" />
             </dxlc:LayoutItem>
             <dxlc:LayoutItem Label="Lunch End">
-                <dxe:TextEdit EditValue="{Binding LunchEnd, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay, Converter={local:TimeSpanToDateTimeConverter}}"
-                              Mask="hh:mm:ss" MaskType="DateTime"  MaskUseAsDisplayFormat="True" Margin="4,0,4,0" />
+                <dxe:TextEdit EditValue="{Binding LunchEnd, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
+                              Mask="HH:mm:ss" MaskType="DateTime"  MaskUseAsDisplayFormat="True" Margin="4,0,4,0" />
             </dxlc:LayoutItem>
         </dxlc:LayoutControl>
         <dxsch:SchedulerControl x:Name="scheduler" GroupType="Resource" Start="{Binding Start, Mode=TwoWay}" AllowAppointmentConflicts="True">
             <dxsch:DayView 
-                x:Name="dayView" ResourcesPerPage="2" TimeIndicatorVisibility="Never" TimeMarkerVisibility="Never"
+                x:Name="dayView" ResourcesPerPage="2" TimeIndicatorVisibility="Never" TimeMarkerVisibility="Never" 
+                TimeRegionVisibility="{DXBinding Expr='HighlightLunchHours? $dxsch:TimeRegionVisibility.Always : $dxsch:TimeRegionVisibility.Never'}"
                 SnapToCellsMode="Never" DayCount="5" TimeScale="00:30:00" />
             <dxsch:SchedulerControl.DataSource>
-                <dxsch:DataSource AppointmentsSource="{Binding Appointments}" ResourcesSource="{Binding Calendars}">
+                <dxsch:DataSource AppointmentsSource="{Binding Appointments}" ResourcesSource="{Binding Calendars}"
+                                  TimeRegionsSource="{Binding TimeRegions}"
+                                  >
+                    <dxsch:DataSource.TimeRegionMappings>
+                        <dxsch:TimeRegionMappings
+                                Id="Id" 
+                                ResourceId="CalendarId"
+                                Start="Start"
+                                End="End"
+                                Brush="Brush"
+                                RecurrenceInfo="RecurrenceInfo"
+                                />
+                    </dxsch:DataSource.TimeRegionMappings>
                     <dxsch:DataSource.AppointmentMappings>
                         <dxsch:AppointmentMappings
                             Id="Id"

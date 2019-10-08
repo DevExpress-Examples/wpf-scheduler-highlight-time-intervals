@@ -1,10 +1,13 @@
-﻿using System;
+﻿using DevExpress.Mvvm;
+using DevExpress.Xpf.Scheduling;
+using DevExpress.XtraScheduler;
+using System;
 using System.Collections.Generic;
 using System.Linq;
-using DevExpress.Mvvm;
-using DevExpress.XtraScheduler;
+using System.Windows.Media;
 
-namespace SchedulingDemo {
+namespace SchedulingDemo
+{
     public class TeamCalendar {
         public int Id { get; set; }
         public string Name { get; set; }
@@ -25,6 +28,54 @@ namespace SchedulingDemo {
 
         public string RecurrenceInfo { get; set; }
         public string ReminderInfo { get; set; }
+    }
+
+
+    public class TimeRegion : BindableBase
+    {
+
+        protected int _Id;
+        public int Id
+        {
+            get { return this._Id; }
+            set { this.SetProperty(ref this._Id, value, "Id"); }
+        }
+
+        protected DateTime _Start;
+        public DateTime Start
+        {
+            get { return this._Start; }
+            set { this.SetProperty(ref this._Start, value, "Start"); }
+        }
+
+        protected DateTime _End;
+        public DateTime End
+        {
+            get { return this._End; }
+            set { this.SetProperty(ref this._End, value, "End"); }
+        }
+
+        protected int _CalendarId;
+        public int CalendarId
+        {
+            get { return this._CalendarId; }
+            set { this.SetProperty(ref this._CalendarId, value, "CalendarId"); }
+        }
+
+        protected Brush _Brush;
+        public Brush Brush
+        {
+            get { return this._Brush; }
+            set { this.SetProperty(ref this._Brush, value, "Brush"); }
+        }
+
+
+        protected string _RecurrenceInfo;
+        public string RecurrenceInfo
+        {
+            get { return this._RecurrenceInfo; }
+            set { this.SetProperty(ref this._RecurrenceInfo, value, "RecurrenceInfo"); }
+        }
     }
 
     public class Employee {
@@ -96,12 +147,41 @@ namespace SchedulingDemo {
             int id = 0;
             foreach (TeamAppointment appt in AllAppointments)
                 appt.Id = id++;
+
+            List<TimeRegion> regions = new List<TimeRegion>();
+            regions.Add(new TimeRegion() { Id = 0,
+                Start = DateTime.Today.AddHours(13).AddMinutes(20),
+                End = DateTime.Today.AddHours(14).AddMinutes(45),
+                Brush = new SolidColorBrush(Colors.Blue) { Opacity = 0.4 },
+                CalendarId = 0,
+                RecurrenceInfo = ((RecurrenceInfo)RecurrenceBuilder.Daily(DateTime.Today.AddHours(13).AddMinutes(20)).Build()).ToXml()
+            });
+
+            regions.Add(new TimeRegion()
+            {
+                Id = 2,
+                Start = DateTime.Today.AddHours(20),
+                End = DateTime.Today.AddHours(22),
+                Brush = new SolidColorBrush(Colors.DarkBlue) { Opacity = 0.4 },
+                CalendarId = 0,
+                RecurrenceInfo = ((RecurrenceInfo)RecurrenceBuilder.Daily(DateTime.Today.AddHours(20)).Build()).ToXml()
+            });
+            regions.Add(new TimeRegion() {
+                Id = 1,
+                Start = DateTime.Today.AddHours(13),
+                End = DateTime.Today.AddHours(14),
+                Brush = new SolidColorBrush(Colors.Blue) { Opacity = 0.4 },
+                CalendarId = 1,
+                RecurrenceInfo = ((RecurrenceInfo)RecurrenceBuilder.Daily(DateTime.Today.AddHours(13)).Build()).ToXml()
+            });
+            TimeRegions = regions;
         }
         public static DateTime Start { get; private set; }
         public static IEnumerable<TeamCalendar> Calendars { get; private set; }
         public static TeamCalendar MyCalendar { get { return Calendars.ElementAt(0); } }
         public static TeamCalendar TeamCalendar { get { return Calendars.ElementAt(1); } }
         public static IEnumerable<TeamAppointment> AllAppointments { get; private set; }
+        public static IEnumerable<TimeRegion> TimeRegions { get; private set; }
         public static IEnumerable<TeamAppointment> VacationAppointments { get; private set; }
         public static IEnumerable<TeamAppointment> BirthdayAppointments { get; private set; }
         public static IEnumerable<TeamAppointment> ConferenceAppointments { get; private set; }
