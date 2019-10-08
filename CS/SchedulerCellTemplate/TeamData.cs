@@ -154,7 +154,7 @@ namespace SchedulingDemo
                 End = DateTime.Today.AddHours(14).AddMinutes(45),
                 Brush = new SolidColorBrush(Colors.Blue) { Opacity = 0.4 },
                 CalendarId = 0,
-                RecurrenceInfo = ((RecurrenceInfo)RecurrenceBuilder.Daily(DateTime.Today.AddHours(13).AddMinutes(20)).Build()).ToXml()
+                RecurrenceInfo = ((RecurrenceInfo)RecurrenceBuilder.Daily(new DateTime(DateTime.Today.Year, 1, 1).AddHours(13).AddMinutes(20)).Build()).ToXml()
             });
 
             regions.Add(new TimeRegion()
@@ -164,7 +164,7 @@ namespace SchedulingDemo
                 End = DateTime.Today.AddHours(22),
                 Brush = new SolidColorBrush(Colors.DarkBlue) { Opacity = 0.4 },
                 CalendarId = 0,
-                RecurrenceInfo = ((RecurrenceInfo)RecurrenceBuilder.Daily(DateTime.Today.AddHours(20)).Build()).ToXml()
+                RecurrenceInfo = ((RecurrenceInfo)RecurrenceBuilder.Daily(new DateTime(DateTime.Today.Year, 1, 1).AddHours(20)).Build()).ToXml()
             });
             regions.Add(new TimeRegion() {
                 Id = 1,
@@ -172,7 +172,7 @@ namespace SchedulingDemo
                 End = DateTime.Today.AddHours(14),
                 Brush = new SolidColorBrush(Colors.Blue) { Opacity = 0.4 },
                 CalendarId = 1,
-                RecurrenceInfo = ((RecurrenceInfo)RecurrenceBuilder.Daily(DateTime.Today.AddHours(13)).Build()).ToXml()
+                RecurrenceInfo = ((RecurrenceInfo)RecurrenceBuilder.Daily(new DateTime(DateTime.Today.Year, 1, 1).AddHours(13)).Build()).ToXml()
             });
             TimeRegions = regions;
         }

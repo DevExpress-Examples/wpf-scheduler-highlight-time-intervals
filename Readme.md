@@ -13,14 +13,27 @@ This example demonstrates how to indicate special time slots with a custom colo
 
 <h3>Description</h3>
 
-To color time cells in a custom manner, a custom cell style with a CellControl's custom content template is used.&nbsp;To apply the custom cell style to a certain scheduler view, assign it to&nbsp;the &nbsp;ViewBase.CellStyle property. In this example, the cell style is customized for the DayView.<br>
-<code lang="xaml">  &lt;Style TargetType="dxsch:DayView"&gt;
-            &lt;Style.Triggers&gt;
-                &lt;DataTrigger Binding="{Binding HighlightLunchHours}" Value="True"&gt;
-                    &lt;Setter Property="CellStyle" Value="{StaticResource CellControl.Style}"/&gt;
-                &lt;/DataTrigger&gt;
-            &lt;/Style.Triggers&gt;
-  &lt;/Style&gt;</code>
+Starting with **v19.2**, SchedulerControl supports Time Regions. They allow you to highlight a certain group of cells (or their parts). For this purpose, it's sufficient to define a collection of such Time Region descriptors and use this collection in DataSource's **TimeRegionsSource** property. To declare mappings to properties from these descriptors, use the **TimeRegionMappings** object: 
+
+```xaml
+   <dxsch:DataSource ...
+                     TimeRegionsSource="{Binding TimeRegions}">
+		<dxsch:DataSource.TimeRegionMappings>
+			<dxsch:TimeRegionMappings
+					Id="Id" 
+					ResourceId="CalendarId"
+					Start="Start"
+					End="End"
+					Brush="Brush"
+					RecurrenceInfo="RecurrenceInfo"
+					/>
+		</dxsch:DataSource.TimeRegionMappings>
+		...
+	</dxsch:DataSource>
+```
+
+In this example, the lunch time is highlighted with the help of such Time Regions. A collection of their descriptors are available from the **TimeRegions** property from the **CellCustomizationDemoViewModel** class. To repeat these regions, their **RecurrenceInfo** property contains corresponding recurrence settings. These settings are built with the help of the **RecurrenceBuilder** class.
+
 
 <br/>
 
