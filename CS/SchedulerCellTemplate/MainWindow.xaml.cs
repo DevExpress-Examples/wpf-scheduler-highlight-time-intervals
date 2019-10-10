@@ -52,7 +52,7 @@ namespace SchedulerCellTemplate
             region.End = this.LunchEnd;
             RecurrenceInfo info = new RecurrenceInfo();
             info.FromXml(region.RecurrenceInfo);
-            info.Start = region.Start;
+            info.Start = info.Start.Date.AddTicks(region.Start.TimeOfDay.Ticks);
             region.RecurrenceInfo = info.ToXml();
         }
 
