@@ -93,6 +93,17 @@ Namespace SchedulingDemo
                 Me.SetProperty(Me._RecurrenceInfo, value, "RecurrenceInfo")
             End Set
         End Property
+
+        Protected _Type As Integer
+
+        Public Property Type As Integer
+            Get
+                Return Me._Type
+            End Get
+            Set(ByVal value As Integer)
+                Me.SetProperty(Me._Type, value, "Type")
+            End Set
+        End Property
     End Class
 
 
@@ -187,6 +198,7 @@ Namespace SchedulingDemo
                 .Brush = New SolidColorBrush(Colors.Blue) With {
                     .Opacity = 0.4
                 },
+                .Type = TimeRegionType.Pattern,
                 .CalendarId = 0,
                 .RecurrenceInfo = (CType(RecurrenceBuilder.Daily(New DateTime(DateTime.Today.Year, 1, 1).AddHours(13).AddMinutes(20)).Build(), RecurrenceInfo)).ToXml()
             })
@@ -198,6 +210,7 @@ Namespace SchedulingDemo
                 .Brush = New SolidColorBrush(Colors.DarkBlue) With {
                     .Opacity = 0.4
                 },
+                .Type = TimeRegionType.Pattern,
                 .CalendarId = 0,
                 .RecurrenceInfo = (CType(RecurrenceBuilder.Daily(New DateTime(DateTime.Today.Year, 1, 1).AddHours(20)).Build(), RecurrenceInfo)).ToXml()
             })
@@ -206,6 +219,7 @@ Namespace SchedulingDemo
                 .Id = 1,
                 .Start = DateTime.Today.AddHours(13),
                 .[End] = DateTime.Today.AddHours(14),
+                .Type = TimeRegionType.Pattern,
                 .Brush = New SolidColorBrush(Colors.Blue) With {
                     .Opacity = 0.4
                 },

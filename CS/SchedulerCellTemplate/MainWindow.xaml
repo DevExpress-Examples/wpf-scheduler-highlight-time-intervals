@@ -39,6 +39,7 @@
                                 Start="Start"
                                 End="End"
                                 Brush="Brush"
+                                Type="Type"
                                 RecurrenceInfo="RecurrenceInfo"
                                 />
                     </dxsch:DataSource.TimeRegionMappings>

@@ -70,6 +70,13 @@ namespace SchedulingDemo
         }
 
 
+        protected int _Type;
+        public int Type
+        {
+            get { return this._Type; }
+            set { this.SetProperty(ref this._Type, value, "Type"); }
+        }
+
         protected string _RecurrenceInfo;
         public string RecurrenceInfo
         {
@@ -154,6 +161,7 @@ namespace SchedulingDemo
                 End = DateTime.Today.AddHours(14).AddMinutes(45),
                 Brush = new SolidColorBrush(Colors.Blue) { Opacity = 0.4 },
                 CalendarId = 0,
+                Type = (int)TimeRegionType.Pattern,
                 RecurrenceInfo = ((RecurrenceInfo)RecurrenceBuilder.Daily(new DateTime(DateTime.Today.Year, 1, 1).AddHours(13).AddMinutes(20)).Build()).ToXml()
             });
 
@@ -164,6 +172,7 @@ namespace SchedulingDemo
                 End = DateTime.Today.AddHours(22),
                 Brush = new SolidColorBrush(Colors.DarkBlue) { Opacity = 0.4 },
                 CalendarId = 0,
+                Type = (int)TimeRegionType.Pattern,
                 RecurrenceInfo = ((RecurrenceInfo)RecurrenceBuilder.Daily(new DateTime(DateTime.Today.Year, 1, 1).AddHours(20)).Build()).ToXml()
             });
             regions.Add(new TimeRegion() {
@@ -172,6 +181,7 @@ namespace SchedulingDemo
                 End = DateTime.Today.AddHours(14),
                 Brush = new SolidColorBrush(Colors.Blue) { Opacity = 0.4 },
                 CalendarId = 1,
+                Type = (int)TimeRegionType.Pattern,
                 RecurrenceInfo = ((RecurrenceInfo)RecurrenceBuilder.Daily(new DateTime(DateTime.Today.Year, 1, 1).AddHours(13)).Build()).ToXml()
             });
             TimeRegions = regions;
