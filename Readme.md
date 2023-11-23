@@ -43,4 +43,4 @@ This example uses [Time Regions](https://docs.devexpress.com/WPF/401378/controls
 
 * [WPF Scheduler - Customize Cell Colors](https://github.com/DevExpress-Examples/wpf-scheduler-customize-cell-colors)
 * [WPF Scheduler - Disable Resource Colorization](https://github.com/DevExpress-Examples/wpf-scheduler-disable-resource-colorization)
-* [WPF Scheduler - Conditionally Show and Hide Time Regions](https://github.com/DevExpress-Examples/how-to-conditionally-show-and-hide-time-regions-in-scheduler-control)
+* [WPF Scheduler - Filter Time Regions](https://github.com/DevExpress-Examples/wpf-scheduler-filter-time-regions)
