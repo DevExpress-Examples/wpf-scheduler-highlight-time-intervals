@@ -6,7 +6,7 @@
 
 # WPF Scheduler - Highlight Time Intervals
 
-This example uses [Time Regions](https://docs.devexpress.com/WPF/401378/controls-and-libraries/scheduler/time-regions) to highlight time intervals with a custom color.
+This example uses [Time Regions](https://docs.devexpress.com/WPF/401378/controls-and-libraries/scheduler/time-regions) to highlight time intervals with custom colors.
 
 ![image](./media/f1fbb0a1-dcae-4756-8b80-da96524b9ca6.png)
 
