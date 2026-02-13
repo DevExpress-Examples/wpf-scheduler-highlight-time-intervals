@@ -46,7 +46,7 @@ This example uses [Time Regions](https://docs.devexpress.com/WPF/401378/controls
 * [WPF Scheduler - Disable Resource Colorization](https://github.com/DevExpress-Examples/wpf-scheduler-disable-resource-colorization)
 * [WPF Scheduler - Filter Time Regions](https://github.com/DevExpress-Examples/wpf-scheduler-filter-time-regions)
 <!-- feedback -->
-## Does this example address your development requirements/objectives?
+## Does This Example Address Your Development Requirements/Objectives?
 
 [<img src="https://www.devexpress.com/support/examples/i/yes-button.svg"/>](https://www.devexpress.com/support/examples/survey.xml?utm_source=github&utm_campaign=wpf-scheduler-highlight-time-intervals&~~~was_helpful=yes) [<img src="https://www.devexpress.com/support/examples/i/no-button.svg"/>](https://www.devexpress.com/support/examples/survey.xml?utm_source=github&utm_campaign=wpf-scheduler-highlight-time-intervals&~~~was_helpful=no)
 
